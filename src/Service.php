@@ -15,7 +15,7 @@ use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 
 /**
- * Class Service
+ * Class Service.
  *
  * @property HandlerResolver $resolver
  *
@@ -29,7 +29,7 @@ use yii\helpers\ArrayHelper;
  * @method string           getUrl( string $filename )
  * @method string           getPresignedUrl( string $filename, $expires )
  *
- * @package aklim\yii2\aws\s3
+ * @author Andrey Klimenko <andrey@cyberwrite.com>
  */
 class Service extends Component implements ServiceInterface
 {
@@ -77,7 +77,7 @@ class Service extends Component implements ServiceInterface
      *
      * @return mixed
      */
-    public function execute(Command $command)
+    public function execute(Command $command): mixed
     {
         return $this->getComponent('bus')->execute($command);
     }

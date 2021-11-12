@@ -5,11 +5,11 @@ An Amazon S3 component for Yii2.
 [![Latest Stable Version](https://img.shields.io/github/v/release/aklim/yii2-aws-s3?color=green)](https://github.com/aklim/yii2-aws-s3/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/aklim/yii2-aws-s3/blob/2.x/LICENSE)
 
-> Version 3.x requires PHP 8.
+> This version requires PHP 8.x
 
 ## About this project
 
-This project is a fork from the  [bp-sys/yii2-aws-s3](https://github.com/bp-sys/yii2-aws-s3).
+This project allow you to work with Amazon S3 service in Yii2 application.
 
 ## Installation
 
@@ -24,7 +24,7 @@ This project is a fork from the  [bp-sys/yii2-aws-s3](https://github.com/bp-sys/
     ```php
     'components' => [
         // ...
-        's3' => [
+        'yii_s3' => [
             'class' => 'bpsys\yii2\aws\s3\Service',
             'credentials' => [ // Aws\Credentials\CredentialsInterface|array|callable
                 'key' => 'my-key',
@@ -49,7 +49,7 @@ execution.
 
 ```php
 /** @var \bpsys\yii2\aws\s3\Service $s3 */
-$s3 = Yii::$app->get('s3');
+$s3 = Yii::$app->get('yii_s3');
 
 /** @var \Aws\ResultInterface $result */
 $result = $s3->commands()->get('filename.ext')->saveAs('/path/to/local/file.ext')->execute();
@@ -78,7 +78,7 @@ $signedUrl = $s3->commands()->getPresignedUrl('filename.ext', '+2 days')->execut
 
 ```php
 /** @var \bpsys\yii2\aws\s3\Service $s3 */
-$s3 = Yii::$app->get('s3');
+$s3 = Yii::$app->get('yii_s3');
 
 /** @var \Aws\ResultInterface $result */
 $result = $s3->get('filename.ext');
@@ -109,7 +109,7 @@ $signedUrl = $s3->getPresignedUrl('filename.ext', '+2 days'); // Pass only one p
 
 ```php
 /** @var \bpsys\yii2\aws\s3\interfaces\Service $s3 */
-$s3 = Yii::$app->get('s3');
+$s3 = Yii::$app->get('yii_s3');
 
 /** @var \bpsys\yii2\aws\s3\commands\GetCommand $command */
 $command = $s3->create(GetCommand::class);

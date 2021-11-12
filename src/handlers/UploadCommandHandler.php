@@ -25,7 +25,7 @@ final class UploadCommandHandler extends Handler
     {
         $source = $this->sourceToStream($command->getSource());
         $options = array_filter($command->getOptions());
-
+        
         $promise = $this->s3Client->uploadAsync(
             $command->getBucket(),
             $command->getFilename(),
@@ -33,10 +33,10 @@ final class UploadCommandHandler extends Handler
             $command->getAcl(),
             $options
         );
-
+        
         return $command->isAsync() ? $promise : $promise->wait();
     }
-
+    
     /**
      * Create a new stream based on the input type.
      *
@@ -46,10 +46,11 @@ final class UploadCommandHandler extends Handler
      */
     protected function sourceToStream(mixed $source): StreamInterface
     {
-        if (is_string($source)) {
-            $source = Psr7\try_fopen($source, 'r+');
+        if ( is_string($source) ) {
+            
+            $source = Psr7\Utils::tryFopen($source, 'r+');
         }
-
-        return Psr7\stream_for($source);
+        
+        return Psr7\Utils::streamFor($source);
     }
 }

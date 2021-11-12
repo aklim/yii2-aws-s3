@@ -7,8 +7,6 @@ use aklim\yii2\aws\s3\base\commands\traits\Async;
 use aklim\yii2\aws\s3\interfaces\commands\Asynchronous;
 use aklim\yii2\aws\s3\interfaces\commands\HasAcl;
 use aklim\yii2\aws\s3\interfaces\commands\HasBucket;
-use Aws\ResultInterface;
-use GuzzleHttp\Promise\PromiseInterface;
 
 /**
  * Class UploadCommand.

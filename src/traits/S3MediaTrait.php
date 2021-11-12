@@ -23,7 +23,7 @@ trait S3MediaTrait
      */
     public function getS3Component(): Module
     {
-        return Yii::$app->get('s3');
+        return Yii::$app->get('yii_s3');
     }
 
     /**
