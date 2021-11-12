@@ -15,8 +15,7 @@
     "authors": [
         {
             "name": "Andrey Klimenko",
-            "email": "andrey.iemail@gmail.com",
-            "homepage": "https://bpsys.com.br"
+            "email": "andrey.iemail@gmail.com"
         }
     ],
     "require": {
