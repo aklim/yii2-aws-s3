@@ -2,9 +2,8 @@
 
 An Amazon S3 component for Yii2.
 
-[![Latest Stable Version](https://img.shields.io/github/v/release/aklim/yii2-aws-s3?color=brightgreen)](https://github.com/aklim/yii2-aws-s3/)
+[![Latest Stable Version](https://img.shields.io/github/v/release/aklim/yii2-aws-s3?color=green)](https://github.com/aklim/yii2-aws-s3/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/aklim/yii2-aws-s3/blob/2.x/LICENSE)
-
 
 > Yii2 AWS S3 uses [SemVer](http://semver.org/).
 
