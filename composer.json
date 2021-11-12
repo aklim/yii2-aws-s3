@@ -1,0 +1,47 @@
+{
+    "name": "aklim/yii2-aws-s3",
+    "type": "yii2-extension",
+    "description": "An Amazon S3 component for Yii2",
+    "keywords": [
+        "yii2",
+        "aws",
+        "s3",
+        "aws-s3",
+        "yii2-aws",
+        "yii2-s3"
+    ],
+    "homepage": "https://github.com/aklim/yii2-aws-s3",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrey Klimenko",
+            "email": "andrey.iemail@gmail.com",
+            "homepage": "https://bpsys.com.br"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "aws/aws-sdk-php": "3.*",
+        "yiisoft/yii2": "2.0.*"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.6.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "aklim\\yii2\\aws\\s3\\": "src/"
+        }
+    },
+    "config": {
+        "process-timeout": 1800,
+        "fxp-asset": {
+            "enabled": false
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
