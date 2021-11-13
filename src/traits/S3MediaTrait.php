@@ -2,10 +2,10 @@
 
 namespace aklim\yii2\aws\s3\traits;
 
+use aklim\yii2\aws\s3\Service;
 use Aws\ResultInterface;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii\base\Module;
 use yii\web\UploadedFile;
 
 /**
@@ -18,14 +18,14 @@ use yii\web\UploadedFile;
 trait S3MediaTrait
 {
     /**
-     * @return Module
+     * @return Service
      * @throws InvalidConfigException
      */
-    public function getS3Component(): Module
+    public function getS3Component(): Service
     {
         return Yii::$app->get('yii_s3');
     }
-
+    
     /**
      * Save UploadedFile to AWS S3.
      * Important: This function uploads this model filename to keep consistency of the model.
@@ -49,7 +49,7 @@ trait S3MediaTrait
         if ( $updateExtension ) {
             $fileName .= '.' . $file->extension;
         }
-
+        
         /** @var ResultInterface $result */
         $result = $this->getS3Component()
             ->commands()
@@ -59,16 +59,16 @@ trait S3MediaTrait
             )
             ->withContentType($file->type)
             ->execute();
-
+        
         // Validate successful upload to S3
         if ( $this->isSuccessResponseStatus($result) ) {
             $this->{$attribute} = $fileName;
             return $fileName;
         }
-
+        
         return false;
     }
-
+    
     /**
      * Delete model file attribute from AWS S3.
      *
@@ -82,22 +82,22 @@ trait S3MediaTrait
             // No file to remove
             return true;
         }
-
+        
         $file = $this->getAttributePath($attribute) . $this->{$attribute};
         $result = $this->getS3Component()
             ->commands()
             ->delete($file)
             ->execute();
-
+        
         // Validate successful removal from S3
         if ( $this->isSuccessResponseStatus($result) ) {
             $this->{$attribute} = null;
             return true;
         }
-
+        
         return false;
     }
-
+    
     /**
      * Retrieves the URL for a given model file attribute.
      *
@@ -111,10 +111,10 @@ trait S3MediaTrait
         if ( empty($this->{$attribute}) ) {
             return '';
         }
-
+        
         return $this->getS3Component()->getUrl($this->getAttributePath($attribute) . $this->{$attribute});
     }
-
+    
     /**
      * Retrieves the presigned URL for a given model file attribute.
      *
@@ -127,14 +127,14 @@ trait S3MediaTrait
         if ( empty($this->{$attribute}) ) {
             return '';
         }
-
+        
         return $this->getS3Component()->getPresignedUrl(
             $this->getAttributePath($attribute) . $this->{$attribute},
             $this->getPresignedUrlDuration()
         );
     }
-
-
+    
+    
     /**
      * Retrieves the URL signature expiration.
      *
@@ -144,7 +144,7 @@ trait S3MediaTrait
     {
         return '+1 day';
     }
-
+    
     /**
      * Retrieves the base path on AWS S3 for a given attribute.
      *
@@ -161,10 +161,10 @@ trait S3MediaTrait
         if ( array_key_exists($attribute, $paths) ) {
             return $paths[ $attribute ];
         }
-
+        
         return '';
     }
-
+    
     /**
      * List the paths on AWS S3 to each model file attribute.
      * It must be a Key-Value array, where Key is the attribute name and Value is the base path for the file in S3.
@@ -176,7 +176,7 @@ trait S3MediaTrait
     {
         return [];
     }
-
+    
     /**
      * Check for valid status code from the AWS S3 response.
      * Success responses will be considered status codes between 200 and 204.
