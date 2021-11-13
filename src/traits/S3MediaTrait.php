@@ -4,6 +4,7 @@ namespace aklim\yii2\aws\s3\traits;
 
 use aklim\yii2\aws\s3\Service;
 use Aws\ResultInterface;
+use JetBrains\PhpStorm\Pure;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\web\UploadedFile;
@@ -75,6 +76,7 @@ trait S3MediaTrait
      * @param string $attribute Attribute name which holds the filename
      *
      * @return bool TRUE on success or if file doesn't exist.
+     * @throws InvalidConfigException
      */
     public function removeFile(string $attribute): bool
     {
@@ -118,9 +120,10 @@ trait S3MediaTrait
     /**
      * Retrieves the presigned URL for a given model file attribute.
      *
-     * @param string $attribute Atribute name which holds the filename
+     * @param string $attribute Attribute name which holds the filename
      *
      * @return string Presigned URL to access file
+     * @throws InvalidConfigException
      */
     public function getFilePresignedUrl(string $attribute): string
     {
@@ -155,7 +158,8 @@ trait S3MediaTrait
      * @see attributePaths()
      *
      */
-    protected function getAttributePath($attribute): string
+    #[Pure]
+    protected function getAttributePath(string $attribute): string
     {
         $paths = $this->attributePaths();
         if ( array_key_exists($attribute, $paths) ) {
@@ -186,7 +190,7 @@ trait S3MediaTrait
      *
      * @return bool TRUE on success status.
      */
-    protected function isSuccessResponseStatus($response): bool
+    protected function isSuccessResponseStatus(ResultInterface $response): bool
     {
         return !empty($response->get('@metadata')['statusCode']) &&
                $response->get('@metadata')['statusCode'] >= 200 &&

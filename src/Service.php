@@ -213,7 +213,7 @@ class Service extends Component implements ServiceInterface
      * @param string              $name
      * @param array|object|string $definition
      */
-    protected function setComponent(string $name, $definition)
+    protected function setComponent(string $name, array|object|string $definition)
     {
         if ( !is_object($definition) ) {
             $definition = !is_array($definition) ? [ 'class' => $definition ] : $definition;
